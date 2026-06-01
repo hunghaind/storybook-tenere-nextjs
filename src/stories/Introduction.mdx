@@ -1,0 +1,217 @@
+# Tenere Design System
+
+Welcome to the Tenere Design System — a comprehensive component library and design token documentation for building consistent, accessible user interfaces across the Tenere platform.
+
+## What is This?
+
+This Storybook contains:
+
+- **Foundations** — Core design tokens (colors, typography, spacing, radii, shadows)
+- **Components** — Reusable UI components with live examples and documentation
+- **Guidelines** — Usage patterns, best practices, and accessibility standards
+
+## Design Principles
+
+### 1. Consistency First
+Every component follows the same foundation tokens. When you use `green-tenere` or `spacing-4`, you're ensuring visual consistency across the entire platform.
+
+### 2. Accessibility by Default
+All components are built with WCAG 2.1 AA standards in mind. Color contrast, keyboard navigation, and screen reader support are non-negotiable.
+
+### 3. Soft & Approachable
+The Tenere brand uses soft corners (12px–40px radius), calm colors, and comfortable spacing to create an inviting, trustworthy experience.
+
+### 4. Clarity Over Decoration
+Use shadows sparingly. Prefer borders for flat content. Let content breathe with proper spacing rather than adding visual noise.
+
+## How to Use This Design System
+
+### Step 1: Start with Foundations
+Before building with components, familiarize yourself with the foundation tokens:
+
+- **[Colors](/story/foundations-colors--primary-palette)** — Brand palette, neutrals, and semantic colors
+- **[Typography](/story/foundations-typography--font-families)** — Font families, sizes, and hierarchy
+- **[Spacing](/story/foundations-spacing--spacing-scale)** — Consistent spacing scale (2px–120px)
+- **[Radii](/story/foundations-radii--radius-scale)** — Corner radius values (12px–40px)
+- **[Shadows](/story/foundations-shadows--shadow-system)** — Elevation system (4 levels)
+
+### Step 2: Browse Components
+Explore pre-built components in the **Components** section:
+
+- **[Button](/story/components-button--primary)** — Primary, secondary, outline, and ghost variants
+- **[Input](/story/components-input--default)** — Text inputs with validation states
+- **[FormHelperText](/story/components-formhelpertext--default)** — Supporting text for form fields
+
+Each component includes:
+- Live interactive examples
+- Props documentation
+- Usage guidelines
+- Code snippets
+
+### Step 3: Copy & Customize
+Use the component code as-is, or customize it for your specific use case. All components are built with Tailwind CSS utility classes, making them easy to extend.
+
+## Project Structure
+
+```
+src/
+├── stories/                        ← Non-component documentation
+│   ├── Introduction.mdx            ← This file
+│   └── Foundations/                ← Design tokens (view-only)
+│       ├── Colors.stories.tsx
+│       ├── Typography.stories.tsx
+│       ├── Spacing.stories.tsx
+│       ├── Radii.stories.tsx
+│       └── Shadows.stories.tsx
+│
+└── components/
+    └── commons/                    ← Reusable components
+        ├── Button/
+        │   ├── index.tsx           ← Component implementation
+        │   └── Button.stories.tsx  ← Colocated story
+        └── Form/
+            ├── Input.tsx
+            ├── Input.stories.tsx
+            ├── FormHelperText.tsx
+            └── FormHelperText.stories.tsx
+```
+
+**Architecture:**
+- **`/stories/`** — Documentation, guidelines, and design tokens that aren't components
+- **`/components/commons/`** — Actual UI components with colocated stories for easy maintenance
+
+## Contributing a New Component
+
+### 1. Create the Component
+```tsx
+// src/components/commons/YourComponent/index.tsx
+interface YourComponentProps {
+  variant?: 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+}
+
+export default function YourComponent({ variant = 'primary', size = 'medium' }: YourComponentProps) {
+  return (
+    // Use foundation tokens for styling
+    <div className="bg-white rounded-xl p-6 shadow-subtle">
+      {/* component markup */}
+    </div>
+  );
+}
+```
+
+### 2. Create the Story File
+```tsx
+// src/components/commons/YourComponent/YourComponent.stories.tsx
+import type { Meta, StoryObj } from '@storybook/nextjs';
+import YourComponent from './index';
+
+const meta: Meta<typeof YourComponent> = {
+  title: 'Components/YourComponent',
+  component: YourComponent,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    variant: 'primary',
+    size: 'medium',
+  },
+};
+```
+
+### 3. Follow the Checklist
+- [ ] Uses foundation tokens (colors, spacing, radii, shadows)
+- [ ] Includes at least 3 story examples (default, variants, interactive)
+- [ ] Props are documented with TypeScript types
+- [ ] Follows accessibility best practices (ARIA labels, keyboard nav)
+- [ ] Tested in both light backgrounds and edge cases
+- [ ] Added to `Components/` category (flat hierarchy)
+
+### 4. Document Edge Cases
+Create stories for:
+- **All variants** (primary, secondary, etc.)
+- **All sizes** (small, medium, large)
+- **All states** (default, hover, focus, disabled, loading, error, success)
+- **With/without icons** (if applicable)
+- **Interactive examples** (with real user interactions)
+- **Form integration** (if applicable)
+
+## Resources
+
+### Design Documentation
+- **This Storybook** — Your complete design system documentation with live examples
+- **Tailwind Config** — All tokens are defined in `tailwind.config.ts`
+
+### Token Reference
+```tsx
+// Colors
+className="bg-green-tenere text-shadow-desert border-border-default"
+
+// Typography
+className="font-inter text-base16" // Body
+className="font-ttnorms text-base32" // Headlines
+
+// Spacing
+className="p-6 gap-4 mb-8" // 24px, 16px, 32px
+
+// Radius
+className="rounded-xl" // 12px
+className="rounded-[20px]" // 20px (default controls)
+className="rounded-[24px]" // 24px (buttons, pills)
+
+// Shadows
+className="shadow-subtle" // Cards, hover states
+className="shadow-medium" // Dropdowns, popovers
+className="shadow-focused" // Modals, dialogs
+```
+
+### Common Patterns
+
+#### Button with Icon
+```tsx
+<Button variant="primary" icon={<ArrowRight size={16} />}>
+  Get Started
+</Button>
+```
+
+#### Form Field with Helper Text
+```tsx
+<div>
+  <label className="block text-base14 font-medium mb-2">Email</label>
+  <Input type="email" placeholder="Enter email" state="default" />
+  <FormHelperText variant="default" size="sm">
+    We'll never share your email
+  </FormHelperText>
+</div>
+```
+
+#### Card with Subtle Elevation
+```tsx
+<div className="bg-white rounded-[20px] p-6 shadow-subtle border border-default">
+  <h3 className="font-ttnorms text-base24 font-semibold mb-3">Card Title</h3>
+  <p className="font-inter text-base15 text-gray-600">Card content</p>
+</div>
+```
+
+## Support
+
+### Questions?
+- Browse **Foundations** section for design token specifications
+- Check existing components for patterns and usage examples
+- Review component stories for interactive code examples
+
+### Found a Bug?
+- Check if the component follows foundation tokens correctly
+- Verify Tailwind classes are applied properly
+- Test in multiple browsers and screen sizes
+
+---
+
+**Let's build something great together.** Start exploring the design system in the sidebar → **Foundations** or **Components**.
