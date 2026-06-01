@@ -18,35 +18,37 @@ const ShadowCard = ({
   usage,
   shadow,
   border,
+  tailwindClass,
 }: {
   name: string;
   description: string;
   usage: string;
   shadow: string;
   border?: string;
+  tailwindClass?: string;
 }) => (
-  <div className="mb-8">
-    <div className="mb-4">
+  <div className="flex flex-col gap-2">
+    <div>
       <h3 className="text-lg font-semibold mb-1">{name}</h3>
-      <p className="text-sm text-gray-600">{description}</p>
     </div>
     <div
-      className="w-full h-32 bg-white rounded-xl flex items-center justify-center"
+      className="w-full p-6 bg-white rounded-xl flex flex-col items-center justify-center gap-3"
       style={{ boxShadow: shadow, border: border || 'none' }}
     >
       <div className="text-center">
-        <div className="text-sm font-medium text-gray-900">{name}</div>
-        <div className="text-xs text-gray-500 mt-1">{usage}</div>
+        <p className="text-sm text-gray-600">{description}</p>
+        <div className="text-sm text-gray-600 mt-1">{usage}</div>
+      </div>
+      <div className="p-3 bg-gray-50 rounded-lg w-full min-h-[72px]">
+        <code className="text-xs font-mono text-gray-700 break-all">box-shadow: {shadow}</code>
+        {border && <code className="text-xs font-mono text-gray-700">border: {border}</code>}
       </div>
     </div>
-    <div className="mt-3 p-3 bg-gray-50 rounded-lg">
-      <code className="text-xs font-mono text-gray-700 break-all">{shadow}</code>
-      {border && (
-        <div className="mt-1">
-          <code className="text-xs font-mono text-gray-700">border: {border}</code>
-        </div>
-      )}
-    </div>
+    {tailwindClass && (
+      <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block">
+        {tailwindClass}
+      </div>
+    )}
   </div>
 );
 
@@ -60,13 +62,14 @@ export const ShadowSystem: Story = {
         sparingly to maintain a clean, modern aesthetic.
       </p>
 
-      <div className="space-y-8">
+      <div className="grid md:grid-cols-2 gap-6">
         <ShadowCard
           name="Flat (No Shadow)"
           description="Default state for most embedded surfaces"
           usage="Content sits within the page plane"
           shadow="none"
           border="1px solid #E5E7EB"
+          tailwindClass="shadow-none border"
         />
 
         <ShadowCard
@@ -74,6 +77,7 @@ export const ShadowSystem: Story = {
           description="Light shadow for slight separation"
           usage="Cards, hover states, slight separation"
           shadow="0px 1px 3px rgba(0,0,0,0.06), 0px 1px 2px rgba(0,0,0,0.04)"
+          tailwindClass="shadow-subtle"
         />
 
         <ShadowCard
@@ -81,6 +85,7 @@ export const ShadowSystem: Story = {
           description="Clear separation from background"
           usage="Dropdowns, popovers, floating elements"
           shadow="0px 4px 12px rgba(0,0,0,0.08), 0px 2px 4px rgba(0,0,0,0.04)"
+          tailwindClass="shadow-medium"
         />
 
         <ShadowCard
@@ -88,6 +93,7 @@ export const ShadowSystem: Story = {
           description="Highest priority overlays"
           usage="Modals, dialogs, high-priority overlays"
           shadow="0px 29px 50px rgba(0,0,0,0.1)"
+          tailwindClass="shadow-focused"
         />
       </div>
     </div>
@@ -103,7 +109,7 @@ export const UsageGuidelines: Story = {
         When and how to apply shadows for effective visual hierarchy.
       </p>
 
-      <div className="space-y-8">
+      <div className="grid md:grid-cols-2 gap-6">
         {/* Flat */}
         <div className="border border-gray-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-3">Flat — No Shadow</h3>
@@ -184,7 +190,7 @@ export const UsageGuidelines: Story = {
 export const ComponentExamples: Story = {
   render: () => (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Component Shadow Examples</h2>
+      <h2 className="text-2xl font-bold mb-4 text">Component Shadow Examples</h2>
       <p className="text-gray-600 mb-8">
         Real-world component examples showing appropriate shadow usage.
       </p>

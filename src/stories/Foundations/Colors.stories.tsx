@@ -11,15 +11,34 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ColorSwatch = ({ name, value }: { name: string; value: string }) => (
+const ColorSwatch = ({
+  name,
+  bgClass,
+  hexValue,
+  textClass,
+}: {
+  name: string;
+  bgClass: string;
+  hexValue?: string;
+  textClass?: string;
+}) => (
   <div className="flex flex-col gap-2">
-    <div
-      className="h-20 rounded-lg border border-gray-200 shadow-sm"
-      style={{ backgroundColor: value }}
-    />
+    <div className={`h-20 rounded-lg border border-gray-200 shadow-sm ${bgClass}`} />
     <div className="text-sm">
-      <div className="font-semibold">{name}</div>
-      <div className="text-gray-500 font-mono text-xs">{value}</div>
+      <div>
+        <span className="font-semibold">{name}</span>{' '}
+        <span className="text-gray-500 font-mono text-xs">({hexValue})</span>
+      </div>
+      {textClass && (
+        <div className="mt-2 space-y-1">
+          <div className="text-xs text-gray-600 font-mono bg-gray-50 px-2 py-1 rounded">
+            text: {textClass}
+          </div>
+          <div className="text-xs text-gray-600 font-mono bg-gray-50 px-2 py-1 rounded">
+            bg: {bgClass}
+          </div>
+        </div>
+      )}
     </div>
   </div>
 );
@@ -33,12 +52,37 @@ export const PrimaryPalette: Story = {
         Core brand colors used for key highlights, primary emphasis, and branded moments.
       </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <ColorSwatch name="Tenere Green" value="#B8EC60" />
-        <ColorSwatch name="Tenere Dark" value="#9ed84e" />
-        <ColorSwatch name="Tenere Darker" value="#85c43a" />
-        <ColorSwatch name="Acacia Green" value="#014810" />
-        <ColorSwatch name="Desert Shadow" value="#191919" />
-        <ColorSwatch name="White" value="#FFFFFF" />
+        <ColorSwatch
+          name="Tenere Green"
+          bgClass="bg-green-tenere"
+          hexValue="#B8EC60"
+          textClass="text-green-tenere"
+        />
+        <ColorSwatch
+          name="Tenere Dark"
+          bgClass="bg-green-tenere-dark"
+          hexValue="#9ed84e"
+          textClass="text-green-tenere-dark"
+        />
+        <ColorSwatch
+          name="Tenere Darker"
+          bgClass="bg-green-tenere-darker"
+          hexValue="#85c43a"
+          textClass="text-green-tenere-darker"
+        />
+        <ColorSwatch
+          name="Acacia Green"
+          bgClass="bg-green-acacia"
+          hexValue="#014810"
+          textClass="text-green-acacia"
+        />
+        <ColorSwatch
+          name="Desert Shadow"
+          bgClass="bg-shadow-desert"
+          hexValue="#191919"
+          textClass="text-shadow-desert"
+        />
+        <ColorSwatch name="White" bgClass="bg-white" hexValue="#FFFFFF" textClass="text-white" />
       </div>
     </div>
   ),
@@ -53,14 +97,62 @@ export const SecondaryPalette: Story = {
         Supporting colors for accents, backgrounds, and visual depth.
       </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <ColorSwatch name="Oasis Green" value="#56A619" />
-        <ColorSwatch name="Sahara Deep" value="#14801A" />
-        <ColorSwatch name="Desert Sky" value="#C2EAFD" />
-        <ColorSwatch name="Sahara Sand" value="#F6F1E9" />
+        <ColorSwatch
+          name="Oasis Green"
+          bgClass="bg-green-oasis"
+          hexValue="#56A619"
+          textClass="text-green-oasis"
+        />
+        <ColorSwatch
+          name="Sahara Deep"
+          bgClass="bg-green-sahara-deep"
+          hexValue="#14801A"
+          textClass="text-green-sahara-deep"
+        />
+        <ColorSwatch
+          name="Desert Sky"
+          bgClass="bg-sky-desert"
+          hexValue="#C2EAFD"
+          textClass="text-sky-desert"
+        />
+        <ColorSwatch
+          name="Sahara Sand"
+          bgClass="bg-sand-sahara"
+          hexValue="#F6F1E9"
+          textClass="text-sand-sahara"
+        />
       </div>
     </div>
   ),
 };
+
+const BorderColorSwatch = ({
+  name,
+  value,
+  usage,
+  tailwindClass,
+}: {
+  name: string;
+  value: string;
+  usage: string;
+  tailwindClass: string;
+}) => (
+  <div className="flex flex-col gap-2">
+    <div className="h-20 rounded-lg bg-white" style={{ border: value }} />
+    <div className="text-sm">
+      <div>
+        <span className="font-semibold">{name}</span>{' '}
+        <span className="text-gray-500 font-mono text-xs">({value})</span>
+      </div>
+      <div className="text-xs text-gray-400 mt-1">{usage}</div>
+      <div className="mt-2">
+        <div className="text-xs text-gray-600 font-mono bg-gray-50 px-2 py-1 rounded inline-block">
+          {tailwindClass}
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 // Border Colors Story
 export const BorderColors: Story = {
@@ -70,39 +162,31 @@ export const BorderColors: Story = {
       <p className="text-gray-600 mb-6">
         Standardized border colors for cards, inputs, and content separation.
       </p>
-      <div className="space-y-4">
-        <div className="flex items-center gap-4">
-          <div className="w-32 h-16 rounded-lg" style={{ border: '1px solid #E5E7EB' }} />
-          <div>
-            <div className="font-semibold">Default</div>
-            <div className="text-sm text-gray-500">1px solid #E5E7EB</div>
-            <div className="text-xs text-gray-400">Cards, inputs, grouped content</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="w-32 h-16 rounded-lg" style={{ border: '1px solid #D1D5DB' }} />
-          <div>
-            <div className="font-semibold">Medium</div>
-            <div className="text-sm text-gray-500">1px solid #D1D5DB</div>
-            <div className="text-xs text-gray-400">Active inputs, hover states</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="w-32 h-16 rounded-lg" style={{ border: '2px solid #191919' }} />
-          <div>
-            <div className="font-semibold">Strong</div>
-            <div className="text-sm text-gray-500">2px solid #191919</div>
-            <div className="text-xs text-gray-400">Focused inputs, selected items</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="w-32 h-16 rounded-lg" style={{ border: '2px solid #B8EC60' }} />
-          <div>
-            <div className="font-semibold">Brand Accent</div>
-            <div className="text-sm text-gray-500">2px solid #B8EC60</div>
-            <div className="text-xs text-gray-400">Active tabs, selected filters</div>
-          </div>
-        </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <BorderColorSwatch
+          name="Default"
+          value="1px solid #E5E7EB"
+          usage="Cards, inputs, grouped content"
+          tailwindClass="border-default"
+        />
+        <BorderColorSwatch
+          name="Medium"
+          value="1px solid #D1D5DB"
+          usage="Active inputs, hover states"
+          tailwindClass="border-medium"
+        />
+        <BorderColorSwatch
+          name="Strong"
+          value="2px solid #191919"
+          usage="Focused inputs, selected items"
+          tailwindClass="border-strong border-2"
+        />
+        <BorderColorSwatch
+          name="Brand Accent"
+          value="2px solid #B8EC60"
+          usage="Active tabs, selected filters"
+          tailwindClass="border-green-tenere border-2"
+        />
       </div>
     </div>
   ),
@@ -119,31 +203,97 @@ export const AllColors: Story = {
 
       <div>
         <h3 className="text-lg font-semibold mb-4">Green Palette</h3>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <ColorSwatch name="green-tenere" value="#B8EC60" />
-          <ColorSwatch name="green-tenere-dark" value="#9ed84e" />
-          <ColorSwatch name="green-tenere-darker" value="#85c43a" />
-          <ColorSwatch name="green-acacia" value="#014810" />
-          <ColorSwatch name="green-oasis" value="#56A619" />
-          <ColorSwatch name="green-sahara-deep" value="#14801A" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <ColorSwatch
+            name="green-tenere"
+            bgClass="bg-green-tenere"
+            hexValue="#B8EC60"
+            textClass="text-green-tenere"
+          />
+          <ColorSwatch
+            name="green-tenere-dark"
+            bgClass="bg-green-tenere-dark"
+            hexValue="#9ed84e"
+            textClass="text-green-tenere-dark"
+          />
+          <ColorSwatch
+            name="green-tenere-darker"
+            bgClass="bg-green-tenere-darker"
+            hexValue="#85c43a"
+            textClass="text-green-tenere-darker"
+          />
+          <ColorSwatch
+            name="green-acacia"
+            bgClass="bg-green-acacia"
+            hexValue="#014810"
+            textClass="text-green-acacia"
+          />
+          <ColorSwatch
+            name="green-oasis"
+            bgClass="bg-green-oasis"
+            hexValue="#56A619"
+            textClass="text-green-oasis"
+          />
+          <ColorSwatch
+            name="green-sahara-deep"
+            bgClass="bg-green-sahara-deep"
+            hexValue="#14801A"
+            textClass="text-green-sahara-deep"
+          />
         </div>
       </div>
 
       <div>
         <h3 className="text-lg font-semibold mb-4">Neutral Palette</h3>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <ColorSwatch name="shadow-desert" value="#191919" />
-          <ColorSwatch name="sky-desert" value="#C2EAFD" />
-          <ColorSwatch name="sand-sahara" value="#F6F1E9" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <ColorSwatch
+            name="shadow-desert"
+            bgClass="bg-shadow-desert"
+            hexValue="#191919"
+            textClass="text-shadow-desert"
+          />
+          <ColorSwatch
+            name="sky-desert"
+            bgClass="bg-sky-desert"
+            hexValue="#C2EAFD"
+            textClass="text-sky-desert"
+          />
+          <ColorSwatch
+            name="sand-sahara"
+            bgClass="bg-sand-sahara"
+            hexValue="#F6F1E9"
+            textClass="text-sand-sahara"
+          />
         </div>
       </div>
 
       <div>
         <h3 className="text-lg font-semibold mb-4">Border Colors</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <ColorSwatch name="border-default" value="#E5E7EB" />
-          <ColorSwatch name="border-medium" value="#D1D5DB" />
-          <ColorSwatch name="border-strong" value="#191919" />
+          <BorderColorSwatch
+            name="Default"
+            value="1px solid #E5E7EB"
+            usage="Cards, inputs, grouped content"
+            tailwindClass="border-default"
+          />
+          <BorderColorSwatch
+            name="Medium"
+            value="1px solid #D1D5DB"
+            usage="Active inputs, hover states"
+            tailwindClass="border-medium"
+          />
+          <BorderColorSwatch
+            name="Strong"
+            value="2px solid #191919"
+            usage="Focused inputs, selected items"
+            tailwindClass="border-strong border-2"
+          />
+          <BorderColorSwatch
+            name="Brand Accent"
+            value="2px solid #B8EC60"
+            usage="Active tabs, selected filters"
+            tailwindClass="border-green-tenere border-2"
+          />
         </div>
       </div>
     </div>

@@ -17,12 +17,14 @@ const TypeSample = ({
   lineHeight,
   weight = 'normal',
   text = 'The quick brown fox jumps over the lazy dog',
+  tailwindClass,
 }: {
   fontFamily: string;
   fontSize: string;
   lineHeight: string;
   weight?: string;
   text?: string;
+  tailwindClass?: string;
 }) => (
   <div className="border-b border-gray-200 pb-4 mb-4">
     <div
@@ -35,10 +37,15 @@ const TypeSample = ({
     >
       {text}
     </div>
-    <div className="mt-2 text-sm text-gray-500">
+    <div className="mt-2 text-sm text-gray-500 flex items-start justify-between gap-4">
       <span className="font-mono">
         {fontFamily} · {fontSize} · {lineHeight} line-height
       </span>
+      {tailwindClass && (
+        <span className="text-xs font-mono bg-gray-50 px-2 py-1 rounded whitespace-nowrap">
+          {tailwindClass}
+        </span>
+      )}
     </div>
   </div>
 );
@@ -63,6 +70,7 @@ export const FontFamilies: Story = {
             lineHeight="1.1"
             weight="700"
             text="Display Headlines & High Emphasis"
+            tailwindClass="font-ttnorms"
           />
         </div>
 
@@ -76,6 +84,7 @@ export const FontFamilies: Story = {
             fontSize="16px"
             lineHeight="1.5"
             text="Body copy and interface text for optimal reading comfort"
+            tailwindClass="font-inter"
           />
         </div>
 
@@ -90,6 +99,7 @@ export const FontFamilies: Story = {
             lineHeight="1.1"
             weight="700"
             text="Promotional Moments"
+            tailwindClass="font-montserrat"
           />
         </div>
       </div>
@@ -112,6 +122,7 @@ export const TTNormsScale: Story = {
           lineHeight="1.1"
           weight="700"
           text="50px Display"
+          tailwindClass="text-[50px]"
         />
         <TypeSample
           fontFamily="TTNormsStd, sans-serif"
@@ -119,6 +130,7 @@ export const TTNormsScale: Story = {
           lineHeight="1.1"
           weight="700"
           text="40px Large Headline"
+          tailwindClass="text-base40"
         />
         <TypeSample
           fontFamily="TTNormsStd, sans-serif"
@@ -126,6 +138,7 @@ export const TTNormsScale: Story = {
           lineHeight="1.1"
           weight="700"
           text="36px Headline"
+          tailwindClass="text-base36"
         />
         <TypeSample
           fontFamily="TTNormsStd, sans-serif"
@@ -133,6 +146,7 @@ export const TTNormsScale: Story = {
           lineHeight="1.1"
           weight="700"
           text="32px Medium Headline"
+          tailwindClass="text-base32"
         />
         <TypeSample
           fontFamily="TTNormsStd, sans-serif"
@@ -140,6 +154,7 @@ export const TTNormsScale: Story = {
           lineHeight="1.1"
           weight="600"
           text="28px Small Headline"
+          tailwindClass="text-base28"
         />
         <TypeSample
           fontFamily="TTNormsStd, sans-serif"
@@ -147,6 +162,7 @@ export const TTNormsScale: Story = {
           lineHeight="1.1"
           weight="600"
           text="24px Section Title"
+          tailwindClass="text-base24"
         />
         <TypeSample
           fontFamily="TTNormsStd, sans-serif"
@@ -154,6 +170,7 @@ export const TTNormsScale: Story = {
           lineHeight="1.1"
           weight="600"
           text="20px Subsection Title"
+          tailwindClass="text-base20"
         />
       </div>
     </div>
@@ -175,6 +192,7 @@ export const InterScale: Story = {
           lineHeight="1.4"
           weight="600"
           text="26px Large Body Lead"
+          tailwindClass="text-base26"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
@@ -182,48 +200,56 @@ export const InterScale: Story = {
           lineHeight="1.5"
           weight="500"
           text="20px Emphasized Body"
+          tailwindClass="text-base20"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
           fontSize="18px"
           lineHeight="1.5"
           text="18px Large Body Text"
+          tailwindClass="text-base18"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
           fontSize="17px"
           lineHeight="1.5"
           text="17px Body Text"
+          tailwindClass="text-base17"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
           fontSize="16px"
           lineHeight="1.5"
           text="16px Default Body (Most common size for reading)"
+          tailwindClass="text-base16"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
           fontSize="15px"
           lineHeight="1.6"
           text="15px Small Body Text"
+          tailwindClass="text-base15"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
           fontSize="14px"
           lineHeight="1.6"
           text="14px Interface Text (Labels, buttons, inputs)"
+          tailwindClass="text-base14"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
           fontSize="13px"
           lineHeight="1.6"
           text="13px Secondary Text (Metadata, captions)"
+          tailwindClass="text-base13"
         />
         <TypeSample
           fontFamily="InterUI, sans-serif"
           fontSize="12px"
           lineHeight="1.5"
           text="12px Smallest Text (Fine print, timestamps)"
+          tailwindClass="text-base12"
         />
       </div>
     </div>
@@ -265,6 +291,9 @@ export const AllFontSizes: Story = {
           <div key={size} className="flex items-center gap-4">
             <div className="w-20 text-sm text-gray-500 font-mono">{size}</div>
             <div className={className}>The quick brown fox jumps over the lazy dog</div>
+            <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded whitespace-nowrap">
+              {className}
+            </div>
           </div>
         ))}
       </div>

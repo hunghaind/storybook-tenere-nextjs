@@ -11,13 +11,20 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const SpacingBlock = ({ size, px, rem }: { size: string; px: number; rem: number }) => (
+const SpacingBlock = ({ size, px, rem, tailwindClass }: { size: string; px: number; rem: number; tailwindClass?: string }) => (
   <div className="flex items-center gap-6 mb-4">
     <div className="w-24 text-sm font-mono text-gray-600">
       {px}px / {rem}rem
     </div>
     <div className="bg-green-tenere rounded" style={{ width: `${px}px`, height: '32px' }} />
-    <div className="text-sm text-gray-500">{size}</div>
+    <div className="flex-1">
+      <div className="text-sm text-gray-500">{size}</div>
+      {tailwindClass && (
+        <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block mt-1">
+          {tailwindClass}
+        </div>
+      )}
+    </div>
   </div>
 );
 
@@ -31,19 +38,19 @@ export const SpacingScale: Story = {
         additional values for fine-tuning.
       </p>
       <div className="space-y-2">
-        <SpacingBlock size="2xs" px={2} rem={0.125} />
-        <SpacingBlock size="xs" px={4} rem={0.25} />
-        <SpacingBlock size="sm" px={8} rem={0.5} />
-        <SpacingBlock size="md" px={12} rem={0.75} />
-        <SpacingBlock size="base" px={16} rem={1} />
-        <SpacingBlock size="lg" px={24} rem={1.5} />
-        <SpacingBlock size="xl" px={32} rem={2} />
-        <SpacingBlock size="2xl" px={40} rem={2.5} />
-        <SpacingBlock size="3xl" px={48} rem={3} />
-        <SpacingBlock size="4xl" px={64} rem={4} />
-        <SpacingBlock size="5xl" px={80} rem={5} />
-        <SpacingBlock size="6xl" px={96} rem={6} />
-        <SpacingBlock size="7xl" px={120} rem={7.5} />
+        <SpacingBlock size="2xs" px={2} rem={0.125} tailwindClass="p-0.5, m-0.5, gap-0.5" />
+        <SpacingBlock size="xs" px={4} rem={0.25} tailwindClass="p-1, m-1, gap-1" />
+        <SpacingBlock size="sm" px={8} rem={0.5} tailwindClass="p-2, m-2, gap-2" />
+        <SpacingBlock size="md" px={12} rem={0.75} tailwindClass="p-3, m-3, gap-3" />
+        <SpacingBlock size="base" px={16} rem={1} tailwindClass="p-4, m-4, gap-4" />
+        <SpacingBlock size="lg" px={24} rem={1.5} tailwindClass="p-6, m-6, gap-6" />
+        <SpacingBlock size="xl" px={32} rem={2} tailwindClass="p-8, m-8, gap-8" />
+        <SpacingBlock size="2xl" px={40} rem={2.5} tailwindClass="p-10, m-10, gap-10" />
+        <SpacingBlock size="3xl" px={48} rem={3} tailwindClass="p-12, m-12, gap-12" />
+        <SpacingBlock size="4xl" px={64} rem={4} tailwindClass="p-16, m-16, gap-16" />
+        <SpacingBlock size="5xl" px={80} rem={5} tailwindClass="p-20, m-20, gap-20" />
+        <SpacingBlock size="6xl" px={96} rem={6} tailwindClass="p-24, m-24, gap-24" />
+        <SpacingBlock size="7xl" px={120} rem={7.5} tailwindClass="p-30, m-30, gap-30" />
       </div>
     </div>
   ),
@@ -60,51 +67,59 @@ export const UsageGuidelines: Story = {
         {/* Tight Spacing */}
         <div className="border border-gray-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-3">Tight Spacing (4–12px)</h3>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-gray-600 mb-2">
             For tight internal spacing and compact UI elements
           </p>
+          <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block mb-4">
+            gap-1 (4px / 0.25rem)
+          </div>
           <div className="flex gap-1 items-center">
             <div className="bg-green-tenere h-10 w-10 rounded"></div>
             <div className="bg-green-tenere h-10 w-10 rounded"></div>
             <div className="bg-green-tenere h-10 w-10 rounded"></div>
           </div>
-          <div className="text-xs text-gray-500 mt-2">gap: 4px (0.25rem)</div>
         </div>
 
         {/* Standard Spacing */}
         <div className="border border-gray-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-3">Standard Spacing (16–24px)</h3>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-gray-600 mb-2">
             For component padding and related content groups
           </p>
+          <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block mb-4">
+            gap-4 (16px / 1rem)
+          </div>
           <div className="flex gap-4 items-center">
             <div className="bg-green-tenere h-12 w-12 rounded"></div>
             <div className="bg-green-tenere h-12 w-12 rounded"></div>
             <div className="bg-green-tenere h-12 w-12 rounded"></div>
           </div>
-          <div className="text-xs text-gray-500 mt-2">gap: 16px (1rem)</div>
         </div>
 
         {/* Large Blocks */}
         <div className="border border-gray-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-3">Large Blocks (32–48px)</h3>
-          <p className="text-sm text-gray-600 mb-4">For larger blocks and section interiors</p>
+          <p className="text-sm text-gray-600 mb-2">For larger blocks and section interiors</p>
+          <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block mb-4">
+            gap-8 (32px / 2rem)
+          </div>
           <div className="flex gap-8 items-center">
             <div className="bg-green-tenere h-16 w-16 rounded"></div>
             <div className="bg-green-tenere h-16 w-16 rounded"></div>
           </div>
-          <div className="text-xs text-gray-500 mt-2">gap: 32px (2rem)</div>
         </div>
 
         {/* Section Spacing */}
         <div className="border border-gray-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-3">Section Spacing (64–120px)</h3>
-          <p className="text-sm text-gray-600 mb-4">For major section spacing and page rhythm</p>
+          <p className="text-sm text-gray-600 mb-2">For major section spacing and page rhythm</p>
+          <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block mb-4">
+            gap-16 (64px / 4rem)
+          </div>
           <div className="space-y-16">
             <div className="bg-green-tenere h-20 rounded"></div>
             <div className="bg-green-tenere h-20 rounded"></div>
           </div>
-          <div className="text-xs text-gray-500 mt-2">gap: 64px (4rem)</div>
         </div>
       </div>
     </div>
@@ -121,7 +136,10 @@ export const ComponentSpacing: Story = {
       <div className="space-y-8">
         {/* Button Group */}
         <div className="border border-gray-200 rounded-lg p-6">
-          <div className="text-sm text-gray-500 mb-4 font-mono">Button Group (16px gap)</div>
+          <div className="text-sm text-gray-500 mb-2 font-mono">Button Group</div>
+          <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block mb-4">
+            gap-4 (16px)
+          </div>
           <div className="flex gap-4">
             <button className="px-6 py-2 bg-green-tenere rounded-full text-sm font-medium">
               Primary Action
@@ -134,7 +152,10 @@ export const ComponentSpacing: Story = {
 
         {/* Card */}
         <div className="border border-gray-200 rounded-lg p-6">
-          <div className="text-sm text-gray-500 mb-4 font-mono">Card (24px padding)</div>
+          <div className="text-sm text-gray-500 mb-2 font-mono">Card</div>
+          <div className="text-xs font-mono bg-gray-50 px-2 py-1 rounded inline-block mb-4">
+            p-6 (24px padding)
+          </div>
           <div className="border border-gray-200 rounded-xl p-6 max-w-sm">
             <h3 className="text-lg font-semibold mb-3">Card Title</h3>
             <p className="text-sm text-gray-600 mb-4">
