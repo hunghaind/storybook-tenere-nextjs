@@ -1,0 +1,8 @@
+/**
+ * Minimal CSS for Storybook testing
+ * Contains only Tailwind directives - no layout CSS
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
