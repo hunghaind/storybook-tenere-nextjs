@@ -104,7 +104,7 @@ export const SecondaryPalette: Story = {
           textClass="text-green-oasis"
         />
         <ColorSwatch
-          name="Sahara Deep"
+          name="Sahara Deep Green"
           bgClass="bg-green-sahara-deep"
           hexValue="#14801A"
           textClass="text-green-sahara-deep"
@@ -205,37 +205,37 @@ export const AllColors: Story = {
         <h3 className="text-lg font-semibold mb-4">Green Palette</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <ColorSwatch
-            name="green-tenere"
+            name="Tenere Green"
             bgClass="bg-green-tenere"
             hexValue="#B8EC60"
             textClass="text-green-tenere"
           />
           <ColorSwatch
-            name="green-tenere-dark"
+            name="Tenere Dark"
             bgClass="bg-green-tenere-dark"
             hexValue="#9ed84e"
             textClass="text-green-tenere-dark"
           />
           <ColorSwatch
-            name="green-tenere-darker"
+            name="Tenere Darker"
             bgClass="bg-green-tenere-darker"
             hexValue="#85c43a"
             textClass="text-green-tenere-darker"
           />
           <ColorSwatch
-            name="green-acacia"
+            name="Acacia Green"
             bgClass="bg-green-acacia"
             hexValue="#014810"
             textClass="text-green-acacia"
           />
           <ColorSwatch
-            name="green-oasis"
+            name="Oasis Green"
             bgClass="bg-green-oasis"
             hexValue="#56A619"
             textClass="text-green-oasis"
           />
           <ColorSwatch
-            name="green-sahara-deep"
+            name="Sahara Deep Green"
             bgClass="bg-green-sahara-deep"
             hexValue="#14801A"
             textClass="text-green-sahara-deep"
@@ -247,19 +247,19 @@ export const AllColors: Story = {
         <h3 className="text-lg font-semibold mb-4">Neutral Palette</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <ColorSwatch
-            name="shadow-desert"
+            name="Desert Shadow"
             bgClass="bg-shadow-desert"
             hexValue="#191919"
             textClass="text-shadow-desert"
           />
           <ColorSwatch
-            name="sky-desert"
+            name="Desert Sky"
             bgClass="bg-sky-desert"
             hexValue="#C2EAFD"
             textClass="text-sky-desert"
           />
           <ColorSwatch
-            name="sand-sahara"
+            name="Sahara Sand"
             bgClass="bg-sand-sahara"
             hexValue="#F6F1E9"
             textClass="text-sand-sahara"

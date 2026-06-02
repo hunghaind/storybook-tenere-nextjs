@@ -190,7 +190,7 @@ export const UsageGuidelines: Story = {
 export const ComponentExamples: Story = {
   render: () => (
     <div>
-      <h2 className="text-2xl font-bold mb-4 text">Component Shadow Examples</h2>
+      <h2 className="text-2xl font-bold mb-4">Component Shadow Examples</h2>
       <p className="text-gray-600 mb-8">
         Real-world component examples showing appropriate shadow usage.
       </p>
